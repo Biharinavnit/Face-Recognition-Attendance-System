@@ -28,43 +28,97 @@ Project Folder
 ```
 
 ## 🧑‍💻 Installation
-1. Clone the repository:
-```
-git clone https://github.com/your-username/your-repo-name.git
-```
-2. Navigate to the project folder:
-```
-cd your-repo-name
-```
-3. Install dependencies:
-```
-pip install -r requirements.txt
-```
+🧰 Step-by-Step to Run the Face Recognition Attendance System
+1️⃣ Setup Project Folder
 
-## ▶️ How to Use
-### Step 1: Add Images
-Place clear photos of users inside the **images/** folder. Filenames should represent user names.
+Create a new folder, e.g.:
 
-### Step 2: Encode Faces
-Run the following command:
-```
-python encode_faces.py
-```
+C:\Projects\FaceRecognitionAttendance\
 
-### Step 3: Start Attendance System
-```
-python main.py
-```
-The system will open your webcam and begin face recognition.
 
-## 📊 Attendance Output
-Attendance will be saved in **attendance.csv** with:
-- Name
-- Date
-- Time
+Then place these files inside:
+
+collect_images.py
+train.py
+recognize_and_mark_attendance.py
+haarcascade_frontalface_default.xml
+
+2️⃣ Install Required Libraries
+
+Open Command Prompt / Terminal inside that folder and run:
+
+pip install opencv-python numpy pandas
+
+
+If you get an error for cv2.face, install:
+
+pip install opencv-contrib-python
+
+3️⃣ Run Scripts Step by Step
+Step 1 – Collect Images
+
+Run:
+
+python collect_images.py
+
+
+Enter:
+
+Student ID: 22
+Student Name: Navnit
+
+
+✅ Look at the camera — it will capture ~40 images.
+Press q to stop once enough images are collected.
+
+Step 2 – Train the Model
+
+Run:
+
+python train.py
+
+
+This will create:
+
+trainer/trainer.yml
+trainer/labels.pickle
+
+Step 3 – Recognize and Mark Attendance
+
+Run:
+
+python recognize_and_mark_attendance.py
+
+
+It opens your webcam and recognizes faces in real-time.
+If a student is recognized:
+
+Green rectangle → recognized face
+
+Red rectangle → unknown face
+
+Attendance is saved in attendance.csv.
+
+Press q to stop.
+
+4️⃣ Verify Attendance
+
+Open the file attendance.csv.
+It should look like:
+
+id,name,date,time
+22,Navnit,2025-11-11,14:10:22
+
+5️⃣ Troubleshooting Tips
+Problem	Fix
+cv2.face not found	Install opencv-contrib-python
+Camera not opening	Change camera index → cv2.VideoCapture(1)
+Faces not detected	Increase lighting or check haarcascade path
+Model not recognizing	Collect more varied images (different angles)
 
 ## 📷 Sample Output Screenshot
-(Add your project screenshot here)
+<img width="1920" height="1080" alt="Screenshot (102)" src="https://github.com/user-attachments/assets/5a2aeaad-5152-49b8-b8d5-541b879af0af" />
+
 
 ## 🤝 Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
